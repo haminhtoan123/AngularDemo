@@ -9,11 +9,11 @@ import {MessageService} from './message.service'
 })
 export class HeroService {
 
-  private heroesUrl = 'api/heroes';  // URL to web api
+  // private heroesUrl = 'api/heroes';  // URL to web api
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  // httpOptions = {
+  //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  // };
 
   constructor(
     private http: HttpClient,
@@ -27,16 +27,21 @@ export class HeroService {
     //       tap(_ => this.log('fetched heroes')),
     //       catchError(this.handleError<Hero[]>('getHeroes', []))
     //     );
-    // }
+    // }  
     getHeroes(): Hero[]{
       return Heroes
     }
     getHeroById(id:number):any{
-      
-      return Heroes.filter(x => x.id === id) ;
+      console.log(Heroes);
+      return Heroes.filter( x => x.id === id) ;
     }
-    
-
+    addHero(name: string):void{
+      let MaxId:number = Heroes.length;
+      Heroes.push(new Hero(MaxId,name,'',new Date()))
+    }
+    delHero(id: number):void{
+      Heroes.splice(id,1)
+    }
 
     private handleError<T>(operation = 'operation', result?: T) {
       return (error: any): Observable<T> => {

@@ -1,0 +1,35 @@
+<h2>My Heroes</h2>
+
+<div>
+  <label for="new-hero">Hero name: </label>
+  <input id="new-hero" #heroName />
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button class="add-button" (click)="add(heroName.value); heroName.value=''">
+    Add hero
+  </button>
+</div>
+
+<ul class="heroes">
+  <li *ngFor="let hero of heroes; let i=index">
+    <i class="clickspan" (click)="select(i)">
+        <span class="badge" >{{hero.id}} {{hero.name}} </span>
+    </i>
+    <!-- <a routerLink="/detail/{{hero.id}}">
+      
+
+
+    </a> -->
+    <button class="delete" title="delete hero"
+      (click)="delete(i)">x</button>
+  </li>
+</ul>
+<div *ngIf="choose != undefined"> {{heroes[choose].name}} is My Bruh!! </div>
+
+<button class="View Details" title="View Details"
+      (click)="gotoItem()">  Show Details</button>
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->

@@ -1,44 +1,68 @@
-export interface Hero {
-    id: number;
-    name: string;
-    description: string;
+export class Hero {
+    public id:number;
+    public name: string;
+    public description: string;
+    public birthday: Date;
+    constructor(id:number , name:string, description:string, birthday:Date){
+      this.id = id;
+      this.name = name;
+      
+      this.description = description;
+      this.birthday= birthday;
+    }  
+  //   constructor(data: Partial<Hero>) {
+  //     Object.assign(this, data);
+  // }
 }
 
 export const Heroes: Hero[] = [
     {
-      id: 1,
+      id: 0,
       name: 'Narco',
-      description: 'NA'
+      description: 'NA',
+      birthday: new Date()
+    },
+    {
+      id: 1,
+      name: 'Magneta',
+      description: 'Skill null',
+      birthday: new Date()
+
     },
     {
       id: 2,
-      name: 'Magneta',
-      description: 'Skill null'
+      name: 'Tornado',
+      description: 'NA',
+      birthday: new Date()
+
     },
     {
       id: 3,
-      name: 'Tornado',
-      description: 'NA'
+      name: 'Travis',
+      description: 'NA',
+      birthday: new Date()
+
     },
     {
       id: 4,
-      name: 'Tornado4',
-      description: 'NA'
+      name: 'Otto',
+      description: 'NA',
+      birthday: new Date()
+
     },
     {
       id: 5,
-      name: 'Tornado5',
-      description: 'NA'
+      name: 'Bruce Lee',
+      description: 'NA',
+      birthday: new Date()
+
     },
     {
       id: 6,
-      name: 'Tornado6',
-      description: 'NA'
-    },
-    {
-      id: 7,
-      name: 'Tornado7',
-      description: 'NA'
+      name: 'Tornado Super Clone',
+      description: 'NA',
+      birthday: new Date()
+
     }
   ];
   
