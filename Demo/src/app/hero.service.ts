@@ -9,11 +9,11 @@ import {MessageService} from './message.service'
 })
 export class HeroService {
 
-  // private heroesUrl = 'api/heroes';  // URL to web api
+  private heroesUrl = 'api/Hero_arr';  // URL to web api
 
-  // httpOptions = {
-  //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  // };
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(
     private http: HttpClient,
@@ -28,35 +28,40 @@ export class HeroService {
     //       catchError(this.handleError<Hero[]>('getHeroes', []))
     //     );
     // }  
-    getHeroes(): Hero[]{
-      return Heroes
+    // getHeroes(): Hero[]{
+    //   return Heroes
+    // }
+    getHeroes(): Observable<Hero[]> {
+      return this.http.get<Hero[]>(this.heroesUrl)
+
     }
-    getHeroById(id:number):any{
-      console.log(Heroes);
-      return Heroes.filter( x => x.id === id) ;
+    getHeroById(id:number): Observable<Hero>{
+      const url = `${this.heroesUrl}/${id}`;
+
+      return  this.http.get<Hero>(url) ;
     }
-    addHero(name: string):void{
+    addHero(name: string):Observable<any>{
       let MaxId:number = Heroes.length;
-      Heroes.push(new Hero(MaxId,name,'',new Date()))
-    }
-    delHero(id: number):void{
-      Heroes.splice(id,1)
+
+
+      return this.http.put(this.heroesUrl, 
+              new Hero(MaxId,name,'',new Date())
+              , this.httpOptions
+        )
     }
 
-    private handleError<T>(operation = 'operation', result?: T) {
-      return (error: any): Observable<T> => {
-  
-        // TODO: send the error to remote logging infrastructure
-        console.error(error); // log to console instead
-  
-        // TODO: better job of transforming error for user consumption
-        this.log(`${operation} failed: ${error.message}`);
-  
-        // Let the app keep running by returning an empty result.
-        return of(result as T);
-      };
+    delHero(id: number): Observable<Hero>{
+      const url = `${this.heroesUrl}/${id}`;
+      console.log(this.messageService.messages);
+      return this.http.delete<Hero>(url, this.httpOptions).pipe(
+        tap(_ => this.log(`deleted hero id=${id}`))
+        );
     }
-  
+    changeName(hero:Hero): Observable<any>{
+
+      return this.http.put(this.heroesUrl, hero, this.httpOptions);
+    }
+ 
     /** Log a HeroService message with the MessageService */
     private log(message: string) {
      this.messageService.add(`HeroService: ${message}`);

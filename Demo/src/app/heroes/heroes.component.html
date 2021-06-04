@@ -15,19 +15,21 @@
     <i class="clickspan" (click)="select(i)">
         <span class="badge" >{{hero.id}} {{hero.name}} </span>
     </i>
-    <!-- <a routerLink="/detail/{{hero.id}}">
-      
 
-
-    </a> -->
     <button class="delete" title="delete hero"
       (click)="delete(i)">x</button>
+
   </li>
 </ul>
-<div *ngIf="choose != undefined"> {{heroes[choose].name}} is My Bruh!! </div>
 
-<button class="View Details" title="View Details"
-      (click)="gotoItem()">  Show Details</button>
+<div *ngIf="choose != undefined"  >You choose {{heroes[choose].name  }}!! </div>
+
+<button class="View Details" title="View Details" 
+      (click)="gotoItem()" >  Show Details</button> 
+
+<i class="Message"  >
+        <span class="badge" >{{this.Message}} </span>
+</i>
 <!-- 
 Copyright Google LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that

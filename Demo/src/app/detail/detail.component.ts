@@ -30,14 +30,17 @@ export class DetailComponent implements OnInit {
 
   getHero(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    let temp:any= this.heroService.getHeroById(id);
+    this.heroService.getHeroById(id).subscribe(hero => this.hero = hero);
+
     // Object.assign(this.hero, temp);
-    console.log(temp)
-    this.hero =<Hero> temp[0];
+    // this.hero =<Hero> temp[0];
     
 
   }
   save():void{
+    if(this.hero!= undefined){
+      this.heroService.changeName(this.hero).subscribe();
+    }
     
   }
   

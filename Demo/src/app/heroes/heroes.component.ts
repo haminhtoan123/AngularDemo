@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Hero } from '../Hero';
 import { HeroService } from '../hero.service';
@@ -12,19 +12,17 @@ import { HeroService } from '../hero.service';
 export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
   choose: number|undefined;
+  Message: string= '';
   constructor(private heroService: HeroService,
-    private route: ActivatedRoute,
     private router: Router ) { }
 
   ngOnInit() {
-    
     this.getHeroes();
 
   }
 
   getHeroes(): void {
-    this.heroes = this.heroService.getHeroes()
-
+    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes)
 
   }
   select(event: number): void{
@@ -36,11 +34,14 @@ export class HeroesComponent implements OnInit {
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.addHero(name);
+    this.heroService.addHero(name).subscribe(hero => {
+      this.heroes.push(hero);
+    });;
   }
+  
   delete(dele:number): void {
-    this.heroService.delHero(dele)
-
+    this.heroService.delHero(this.heroes[dele].id).subscribe();
+    this.heroes.splice(dele,1);
   }
 
 
@@ -48,9 +49,16 @@ export class HeroesComponent implements OnInit {
   gotoItem(){
     // Pass along the hero id if available
     // so that the HeroList component can select that item.
-    this.router.navigate(['detail/'+ this.choose]);
+    let id :number;
+    if (this.choose != undefined){
+        id = this.choose;
+    }
+    else { 
+      this.Message = "Choose A Hero first";
+      return ;
+    }
+    this.router.navigate(['detail/'+ this.heroes[id].id]);
   }
-
 
 }
 

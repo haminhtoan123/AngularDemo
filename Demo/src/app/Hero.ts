@@ -10,9 +10,7 @@ export class Hero {
       this.description = description;
       this.birthday= birthday;
     }  
-  //   constructor(data: Partial<Hero>) {
-  //     Object.assign(this, data);
-  // }
+
 }
 
 export const Heroes: Hero[] = [
@@ -25,35 +23,35 @@ export const Heroes: Hero[] = [
     {
       id: 1,
       name: 'Magneta',
-      description: 'Skill null',
+      description: 'shouldnt choose this ',
       birthday: new Date()
 
     },
     {
       id: 2,
       name: 'Tornado',
-      description: 'NA',
+      description: 'I dont feel so good',
       birthday: new Date()
 
     },
     {
       id: 3,
       name: 'Travis',
-      description: 'NA',
+      description: 'I dont feel so good',
       birthday: new Date()
 
     },
     {
       id: 4,
       name: 'Otto',
-      description: 'NA',
+      description: 'aaaaa',
       birthday: new Date()
 
     },
     {
       id: 5,
       name: 'Bruce Lee',
-      description: 'NA',
+      description: 'BBBBBBB',
       birthday: new Date()
 
     },
