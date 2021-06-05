@@ -11,16 +11,25 @@ import { HeroService } from '../hero.service';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
-  choose: number|undefined;
-  Message: string= '';
-  constructor(private heroService: HeroService,
-    private router: Router ) { }
+  choose: number = -1;
+  message: string= '';
+  nameInput: string ='';
+  constructor(
+
+    private heroService: HeroService,
+    private router: Router 
+    ) { }
 
   ngOnInit() {
     this.getHeroes();
 
   }
-
+  clearNameInput():void{
+    this.nameInput = '';
+  }
+  clearMessage():void{
+    this.message = '';
+  }
   getHeroes(): void {
     this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes)
 
@@ -32,8 +41,8 @@ export class HeroesComponent implements OnInit {
       console.log(this)
   }
   add(name: string): void {
-    name = name.trim();
     if (!name) { return; }
+    name = name.trim();
     this.heroService.addHero(name).subscribe(hero => {
       this.heroes.push(hero);
     });;
@@ -50,11 +59,11 @@ export class HeroesComponent implements OnInit {
     // Pass along the hero id if available
     // so that the HeroList component can select that item.
     let id :number;
-    if (this.choose != undefined){
+    if (this.choose != -1){
         id = this.choose;
     }
     else { 
-      this.Message = "Choose A Hero first";
+      this.message = "Choose A Hero first";
       return ;
     }
     this.router.navigate(['detail/'+ this.heroes[id].id]);

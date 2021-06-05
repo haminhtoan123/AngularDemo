@@ -2,33 +2,33 @@
 
 <div>
   <label for="new-hero">Hero name: </label>
-  <input id="new-hero" #heroName />
+  <input id="new-hero" [(ngModel)]="nameInput" placeholder="Hero name" />
 
   <!-- (click) passes input value to add() and then clears the input -->
-  <button class="add-button" (click)="add(heroName.value); heroName.value=''">
+  <button class="add-button" (click)="add(nameInput); clearNameInput()">
     Add hero
   </button>
 </div>
 
 <ul class="heroes">
   <li *ngFor="let hero of heroes; let i=index">
-    <i class="clickspan" (click)="select(i)">
-        <span class="badge" >{{hero.id}} {{hero.name}} </span>
+    <i class="clickspan" (click)="select(i); clearMessage()" >
+        <span class="badge" >{{hero.id}} </span> {{hero.name}}
     </i>
 
     <button class="delete" title="delete hero"
       (click)="delete(i)">x</button>
 
-  </li>
+  </li> 
 </ul>
 
-<div *ngIf="choose != undefined"  >You choose {{heroes[choose].name  }}!! </div>
+<div *ngIf="choose != -1"  >You choose {{heroes[choose].name  }}!! </div>
 
 <button class="View Details" title="View Details" 
       (click)="gotoItem()" >  Show Details</button> 
 
 <i class="Message"  >
-        <span class="badge" >{{this.Message}} </span>
+        <span class="badge"   >{{this.message}} </span>
 </i>
 <!-- 
 Copyright Google LLC. All Rights Reserved.

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import {Heroes} from './Hero'
+import {HEROES} from './Hero'
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import {Heroes} from './Hero'
 export class InMemoryDataService implements InMemoryDbService{
 
   createDb(){
-    const Hero_arr = Heroes;
+    const Hero_arr = HEROES;
     return {Hero_arr };
   }
 

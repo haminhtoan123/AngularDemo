@@ -13,7 +13,7 @@ export class Hero {
 
 }
 
-export const Heroes: Hero[] = [
+export const HEROES: Hero[] = [
     {
       id: 0,
       name: 'Narco',
