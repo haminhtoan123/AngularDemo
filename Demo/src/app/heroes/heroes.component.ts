@@ -9,7 +9,16 @@ import { HeroService } from '../hero.service';
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css']
 })
+
+
+
 export class HeroesComponent implements OnInit {
+  /**
+   * heroes: Heroes list to display
+   * choose: the hero's id selected from UI
+   * message: Display if User Click show when no Hero selected
+   * nameInput: Hero's name input for adding hero
+   */
   heroes: Hero[] = [];
   choose: number = -1;
   message: string= '';
@@ -30,6 +39,7 @@ export class HeroesComponent implements OnInit {
   clearMessage():void{
     this.message = '';
   }
+
   getHeroes(): void {
     this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes)
 
@@ -43,8 +53,8 @@ export class HeroesComponent implements OnInit {
   add(name: string): void {
     if (!name) { return; }
     name = name.trim();
-    this.heroService.addHero(name).subscribe(hero => {
-      this.heroes.push(hero);
+    this.heroService.addHero(name).subscribe(
+      hero => {this.heroes.push(hero);
     });;
   }
   
@@ -54,7 +64,7 @@ export class HeroesComponent implements OnInit {
   }
 
 
-
+    
   gotoItem(){
     // Pass along the hero id if available
     // so that the HeroList component can select that item.

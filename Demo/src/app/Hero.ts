@@ -5,8 +5,7 @@ export class Hero {
     public birthday: Date;
     constructor(id:number , name:string, description:string, birthday:Date){
       this.id = id;
-      this.name = name;
-      
+      this.name = name;    
       this.description = description;
       this.birthday= birthday;
     }  
